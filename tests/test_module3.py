@@ -1,5 +1,4 @@
 import pytest
-import inspect
 
 from jobs import app
 from .utils import *
@@ -20,7 +19,8 @@ def test_app_db_path_module3():
 @pytest.mark.test_app_open_connection_get_attribute_module3
 def test_app_open_connection_get_attribute_module3():
     assert 'open_connection' in dir(app), 'Have you defined a function named `open_connection`.'
-    assert 'getattr:g:_connection:None' in get_functions(app.open_connection), 'Have you used the `getattr` function to get the global `_connection`?'
+    assert 'getattr:g:_connection:None' in get_functions(
+        app.open_connection), 'Have you used the `getattr` function to get the global `_connection`?'
 
 @pytest.mark.test_app_open_connection_connection_module3
 def test_app_open_connection_connection_module3():
@@ -41,13 +41,15 @@ def test_app_open_connection_row_factory_module3():
     with app.app.app_context():
         db = app.open_connection()
         assert isinstance(db, app.sqlite3.Connection), 'Are you returning the database connection?'
-        assert id(db.row_factory) == id(app.sqlite3.Row), 'Have you set the database `row_factory` to the sqlite3.Row class?'
+        assert id(db.row_factory) == id(
+            app.sqlite3.Row), 'Have you set the database `row_factory` to the sqlite3.Row class?'
 
 @pytest.mark.test_app_execute_sql_module3
 def test_app_execute_sql_module3():
     assert 'app' in dir(app), 'Have you created an instance of the `Flask` class called `app`?'
     assert 'execute_sql' in dir(app), 'Have you defined a function named `execute_sql`.'
-    assert 'open_connection' in get_functions(app.execute_sql), 'Have you called the `open_connection` function in `execute_sql`?'
+    assert 'open_connection' in get_functions(
+        app.execute_sql), 'Have you called the `open_connection` function in `execute_sql`?'
 
 @pytest.mark.test_app_execute_sql_parameters_module3
 def test_app_execute_sql_parameters_module3():
@@ -60,7 +62,8 @@ def test_app_execute_sql_parameters_module3():
 @pytest.mark.test_app_execute_sql_execute_module3
 def test_app_execute_sql_execute_module3():
     assert 'execute_sql' in dir(app), 'Have you defined a function named `execute_sql`.'
-    assert 'execute:sql:values' in get_functions(app.execute_sql), 'Have you called the `execute` function in `execute_sql`?'
+    assert 'execute:sql:values' in get_functions(
+        app.execute_sql), 'Have you called the `execute` function in `execute_sql`?'
 
 @pytest.mark.test_app_execute_sql_results_module3
 def test_app_execute_sql_results_module3():
@@ -78,7 +81,8 @@ def test_app_execute_sql_results_module3():
 @pytest.mark.test_app_close_connection_module3
 def test_app_close_connection_module3():
     assert 'close_connection' in dir(app), 'Have you defined a function named `close_connection`.'
-    assert 'getattr:g:_connection:None' in get_functions(app.open_connection), 'Have you used the `getattr` function to get the global `_connection`?'
+    assert 'getattr:g:_connection:None' in get_functions(
+        app.open_connection), 'Have you used the `getattr` function to get the global `_connection`?'
     assert 'close' in get_functions(app.execute_sql), 'Have you called the `close` function in `execute_sql`?'
 
 @pytest.mark.test_app_close_connection_decorator_module3

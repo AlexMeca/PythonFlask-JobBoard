@@ -1,5 +1,4 @@
 import pytest
-import sys
 
 from jobs import app
 from .utils import *
@@ -55,10 +54,12 @@ def test_app_employer_route_module6():
 @pytest.mark.test_app_employer_route_employers_module6
 def test_app_employer_route_employers_module6():
     assert 'employer' in dir(app), 'Have you created the `employer` function?'
-    assert 'employer_id' in inspect.getfullargspec(app.employer).args, 'Have you added the correct parameters to the `employer` function parameter list?'
+    assert 'employer_id' in inspect.getfullargspec(
+        app.employer).args, 'Have you added the correct parameters to the `employer` function parameter list?'
     execute_sql = 'execute_sql:SELECT * FROM employer WHERE id=?:employer_id:single:True'
     execute_sql_alternate = 'execute_sql:SELECT * FROM employer WHERE id = ?:employer_id:single:True'
-    assert execute_sql in get_functions(app.employer) or execute_sql_alternate in get_functions(app.employer), '`execute_sql` has not been called or has the wrong parameters.'
+    assert execute_sql in get_functions(app.employer) or execute_sql_alternate in get_functions(
+        app.employer), '`execute_sql` has not been called or has the wrong parameters.'
     result = [item for item in get_functions(app.employer) if item.startswith('render_template:employer.html:employer:employer')]
     assert len(result) == 1, 'Have you added `employer` to the `render_template` call.'
 

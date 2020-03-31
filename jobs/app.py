@@ -11,4 +11,8 @@ def render_template():
 @app.route("/")
 @app.route("/jobs")
 def jobs():
-    return render_template('index.html')
+    return render_template("index.html")
+
+
+if __name__ == '__main__':
+    app.run()
